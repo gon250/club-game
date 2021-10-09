@@ -11,10 +11,18 @@ function Navbar() {
                 </Link>
 
                 <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-                    <a className="me-3 py-2 text-dark text-decoration-none" href="#">Features</a>
-                    <a className="me-3 py-2 text-dark text-decoration-none" href="#">Enterprise</a>
-                    <a className="me-3 py-2 text-dark text-decoration-none" href="#">Support</a>
-                    <Link href="account">
+                    <Link href="/">
+                        <a className="me-3 py-2 text-dark text-decoration-none">Home</a>
+                    </Link>
+                    <Link href="/clubs/me">
+                        <a className="me-3 py-2 text-dark text-decoration-none" href="#">My clubs</a>
+                    </Link>
+                    <Link href="/wip">
+                        <a className="me-3 py-2 text-dark text-decoration-none">
+                            WIP
+                        </a>
+                    </Link>
+                    <Link href="/account">
                         <a className="py-2 text-dark text-decoration-none">Account</a>
                     </Link>
                 </nav>

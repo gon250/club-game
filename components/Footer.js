@@ -26,11 +26,11 @@ function Footer() {
                     </ul>
                 </div>
                 <div className="col-6 col-md">
-                    <h5>Resources</h5>
+                    <h5>WIP</h5>
                     <ul className="list-unstyled text-small">
                         <li className="mb-1">
                             <a className="link-secondary text-decoration-none" href="#">
-
+                                Coming
                             </a>
                         </li>
                     </ul>

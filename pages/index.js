@@ -20,9 +20,7 @@ export default function Home() {
     }, [])
 
     return (
-        <div className="container" style={{padding: '50px 0 100px 0'}}>
-            <h1>Game club</h1>
-            <hr/>
+        <div>
             <Link href="./clubs/new">
                 Create Club
             </Link>
