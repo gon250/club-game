@@ -1,16 +1,11 @@
-html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  background-image: linear-gradient(180deg, #eee, #fff 100px, #fff);
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+.container {
+  max-width: 960px;
 }
 
-* {
-  box-sizing: border-box;
+.pricing-header {
+  max-width: 700px;
 }

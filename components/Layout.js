@@ -1,9 +1,12 @@
+import Navbar from "./Navbar";
+import Footer from "./Footer";
+
 export default function Layout({children}) {
     return (
-        <>
-            {/*<Navbar />*/}
+        <div className="container py-3">
+            <Navbar />
             <main>{children}</main>
-            {/*<Footer />*/}
-        </>
+            <Footer />
+        </div>
     )
 }

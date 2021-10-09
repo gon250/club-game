@@ -1,9 +1,9 @@
-import '../styles/globals.css'
 import Layout from "../components/Layout";
 import { useEffect, useState } from "react";
 import { supabase } from "../utils/supabaseClient";
 import Auth from "../components/Auth";
-import Account from "./account";
+
+import '../styles/globals.css'
 
 function MyApp({Component, pageProps}) {
     const [session, setSession] = useState(null)
