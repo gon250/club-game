@@ -10,12 +10,33 @@ function Clubs() {
     const [message, setMessage] = useState('')
     const [loading, setLoading] = useState(true)
     const [loadingMessages, setLoadingMessages] = useState(false);
+    const [profile, setProfile] = useState(null)
+    const [subscribed, setSubscribed] = useState(false)
 
     useEffect(() => {
         if (id) {
+            if (!profile) {
+                fetchProfile()
+            }
             fetchClub();
         }
     }, [id])
+
+    const fetchProfile = async () => {
+        let {data, error, status} = await supabase
+            .from('profiles')
+            .select(`
+                id,
+                user_clubs(*)
+            `)
+            .eq('id', supabase.auth.user().id)
+            .single()
+        if (data) {
+            setProfile(data)
+            const isSubscribed = data.user_clubs.find(club => club.club_id === id);
+            setSubscribed(!!(isSubscribed && isSubscribed.length > 0))
+        }
+    }
 
     const fetchClub = async () => {
         setLoading(true)
@@ -58,11 +79,27 @@ function Clubs() {
         fetchClub()
     }
 
+    const toogleSubscription = async () => {
+        if (subscribed) {
+            await supabase
+                .from('user_clubs')
+                .delete()
+                .eq('user_id', supabase.auth.user().id)
+                .eq('club_id', id)
+        } else {
+            await supabase
+                .from('user_clubs')
+                .insert([{user_id: supabase.auth.user().id, club_id: id}])
+        }
+        setSubscribed(!subscribed)
+    }
+
     return <div>
         {
             (!loading && club)
                 ? <>
                     <h1>{club.name}</h1>
+                    <button onClick={toogleSubscription}> {subscribed ? 'Unsubscribe' : 'Subscribe'}</button>
                     <p>{club.description}</p>
                     <br/><br/>
                     <h3>Club Messages</h3>
