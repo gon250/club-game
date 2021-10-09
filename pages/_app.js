@@ -15,9 +15,12 @@ function MyApp({Component, pageProps}) {
         })
     }, [])
     return (
-        <Layout>
-            {!session ? <Auth/> : <Component {...pageProps}/>}
-        </Layout>
+        <>
+            {!session
+                ? <Auth/>
+                : <Layout><Component {...pageProps}/></Layout>
+            }
+        </>
     )
 }
 
