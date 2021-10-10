@@ -29,7 +29,7 @@ function Clubs() {
         </div>
         <div className="row">
             <Link href="./clubs/new" passHref>
-                <button type="button" className="btn btn-outline-primary m-2">Can't find a club? create your own</button>
+                <button type="button" className="btn btn-outline-primary m-2">{`Can't find a club? create your own`}</button>
             </Link>
         </div>
     </>
