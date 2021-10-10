@@ -44,9 +44,8 @@ function NewClub() {
             </div>
             <div>
                 <label htmlFor="description" className="form-label">Description</label>
-                <input
+                <textarea
                     className="form-control"
-                    type="text"
                     value={description || ''}
                     onChange={(e) => setDescription(e.target.value)}
                 />

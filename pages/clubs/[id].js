@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+
 import { supabase } from "../../utils/supabaseClient";
 
 function Clubs() {
@@ -9,34 +10,13 @@ function Clubs() {
     const [club, setClub] = useState(null)
     const [message, setMessage] = useState('')
     const [loading, setLoading] = useState(true)
-    const [loadingMessages, setLoadingMessages] = useState(false);
-    const [profile, setProfile] = useState(null)
     const [subscribed, setSubscribed] = useState(false)
 
     useEffect(() => {
         if (id) {
-            if (!profile) {
-                fetchProfile()
-            }
             fetchClub();
         }
     }, [id])
-
-    const fetchProfile = async () => {
-        let {data, error, status} = await supabase
-            .from('profiles')
-            .select(`
-                id,
-                user_clubs(*)
-            `)
-            .eq('id', supabase.auth.user().id)
-            .single()
-        if (data) {
-            setProfile(data)
-            const isSubscribed = data.user_clubs.find(club => club.club_id === id);
-            setSubscribed(!!(isSubscribed && isSubscribed.length > 0))
-        }
-    }
 
     const fetchClub = async () => {
         setLoading(true)
@@ -45,6 +25,7 @@ function Clubs() {
             .select(`
             name, 
             description,
+            user_clubs(*),
             club_pages (
                 message,
                 profiles (
@@ -54,27 +35,24 @@ function Clubs() {
             `)
             .eq('id', id)
             .single()
-
         if (data) {
-            console.log(data)
             setLoading(false)
             setClub(data);
+            setSubscribed(data.user_clubs.length > 0)
         }
 
         if (error) {
             console.log(error)
-            // alert('There was an error while requesting the club.')
+            alert('There was an error while getting the game club info.')
         }
     };
 
     const createMessage = async () => {
-        setLoadingMessages(true);
         const {data, error} = await supabase
             .from('club_pages')
             .insert([
                 {id_club: id, id_user: supabase.auth.user().id, message},
             ])
-        setLoadingMessages(false);
         setMessage('')
         fetchClub()
     }

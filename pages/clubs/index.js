@@ -15,9 +15,7 @@ function Clubs() {
                 setClubs(clubs);
             }
         }
-
         fetchClubs()
-
     }, [])
 
     return <>
@@ -30,8 +28,8 @@ function Clubs() {
             {clubs && clubs.map((item) => <ClubCard key={item.id} club={item} className="col-md-4"/>)}
         </div>
         <div className="row">
-            <Link href="./clubs/new">
-                <button type="button" className="btn btn-outline-primary">Can't find a club? create your own</button>
+            <Link href="./clubs/new" passHref>
+                <button type="button" className="btn btn-outline-primary m-2">Can't find a club? create your own</button>
             </Link>
         </div>
     </>
