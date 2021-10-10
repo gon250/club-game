@@ -18,7 +18,6 @@ function ClubTabs({clubId, owner}) {
     }, [])
 
     async function fetchEvents() {
-        // TODO: Get game as well
         const {data, error} = await supabase
             .from('events')
             .select(`*`)
@@ -56,7 +55,16 @@ function ClubTabs({clubId, owner}) {
 
     function CurrentEvent() {
         if (activeEvent) {
-            return <div>display active event</div>
+            return <div className="card">
+                <div className="card-body">
+                    <h5 className="card-title">{activeEvent.game}</h5>
+                    <h6 className="card-subtitle mb-2 text-muted">started at: {activeEvent.from}</h6>
+                    <p className="card-text">
+                        {activeEvent.description}
+                    </p>
+                    <button className="card-link btn btn-sm btn-primary" disabled>View comments</button>
+                </div>
+            </div>
         }
 
         if (owner) {
@@ -142,7 +150,8 @@ function ClubTabs({clubId, owner}) {
                                 <div className="mt-2">
                                     <button
                                         onClick={createEvent}
-                                        className="btn btn-sm btn-primary m-1">Create Event</button>
+                                        className="btn btn-sm btn-primary m-1">Create Event
+                                    </button>
                                     <button
                                         onClick={() => {
                                             setCreateEventMode(false)

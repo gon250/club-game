@@ -17,11 +17,11 @@ function Navbar() {
                     <Link href="/clubs">
                         <a className="me-3 py-2 text-dark text-decoration-none" href="#">Clubs</a>
                     </Link>
-                    <Link href="/wip">
-                        <a className="me-3 py-2 text-dark text-decoration-none">
-                            WIP
-                        </a>
-                    </Link>
+                    {/*<Link href="/wip">*/}
+                    {/*    <a className="me-3 py-2 text-dark text-decoration-none">*/}
+                    {/*        WIP*/}
+                    {/*    </a>*/}
+                    {/*</Link>*/}
                     <Link href="/account">
                         <a className="py-2 text-dark text-decoration-none">Account</a>
                     </Link>

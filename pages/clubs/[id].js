@@ -42,7 +42,6 @@ function Club() {
         if (data) {
             setLoading(false)
             setClub(data);
-            console.log(data)
             setSubscribed(data.user_clubs.length > 0)
             setOwner(data.profile_id === supabase.auth.user().id)
         }
