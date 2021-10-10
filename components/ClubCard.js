@@ -5,7 +5,7 @@ function ClubCard({club, className}) {
         <div className={`card m-2 ${className}`}>
             <div className="card-body">
                 <h5 className="card-title">{club.name}</h5>
-                <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                {/*<h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>*/}
                 <p className="card-text">
                     {club.description}
                 </p>

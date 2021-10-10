@@ -14,8 +14,8 @@ function Navbar() {
                     <Link href="/">
                         <a className="me-3 py-2 text-dark text-decoration-none">Home</a>
                     </Link>
-                    <Link href="/clubs/me">
-                        <a className="me-3 py-2 text-dark text-decoration-none" href="#">My clubs</a>
+                    <Link href="/clubs">
+                        <a className="me-3 py-2 text-dark text-decoration-none" href="#">Clubs</a>
                     </Link>
                     <Link href="/wip">
                         <a className="me-3 py-2 text-dark text-decoration-none">

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { useEffect, useState } from "react";
 import { supabase } from "../utils/supabaseClient";
+import ClubCard from "../components/ClubCard";
 
 export default function Home() {
     const [userClubs, setUserClubs] = useState(null)
@@ -43,15 +44,9 @@ export default function Home() {
         <div>
             {
                 userClubs && userClubs.length > 0
-                    ? <div>
+                    ? <div className="row">
                         {userClubs.map((item) => {
-                            return (
-                                <div key={item.club_id}>
-                                    Club Name: {item.clubs.name}
-                                    <br/>
-                                    Club Description: {item.clubs.description}
-                                </div>
-                            )
+                            return <ClubCard key={item.id} club={item.clubs} className={'col-md-4'} />
                         })}
                     </div>
                     : <NoClubBox/>
