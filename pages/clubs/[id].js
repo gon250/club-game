@@ -76,21 +76,29 @@ function Clubs() {
         {
             (!loading && club)
                 ? <>
-                    <h1>{club.name}</h1>
-                    <button onClick={toogleSubscription}> {subscribed ? 'Unsubscribe' : 'Subscribe'}</button>
-                    <p>{club.description}</p>
+                    <h1>
+                        {club.name}
+                        <small className="ml-2">
+                            <button className="btn btn-sm btn-outline-primary"
+                                    onClick={toogleSubscription}> {subscribed ? 'Unsubscribe' : 'Subscribe'}</button>
+                        </small>
+                    </h1>
+                    <p className="lead">{club.description}</p>
                     <br/><br/>
-                    <h3>Club Messages</h3>
-                    {club.club_pages && club.club_pages.map((item, id) => {
-                        return <div key={id}>{item.message} by {item.profiles.username}</div>
-                    })}
+                    <h4>Club Messages</h4>
+                    <div className="row">
+                        {club.club_pages && club.club_pages.map((item, id) => {
+                            return <div key={id} className="col-md-12 border border-primary m-2">{item.message} by {item.profiles.username}</div>
+                        })}
+                    </div>
                     <hr/>
                     <div>
-                        <label htmlFor="message">New Message</label>
+                        <label htmlFor="message" className="form-label">New Message</label>
                         <textarea
+                            className="form-control"
                             value={message}
                             onChange={(e) => setMessage(e.target.value)}/>
-                        <button onClick={createMessage}>+ message</button>
+                        <button onClick={createMessage} className="btn btn-sm btn-primary mt-2">add</button>
                     </div>
                 </>
                 : <div>loading</div>

@@ -22,7 +22,7 @@ export default function Home() {
 
     function NoClubBox() {
         return (
-            <div className="pricing-header p-3 pb-md-4 mx-auto text-center">
+            <div className="game-club-box-header p-3 pb-md-4 mx-auto text-center">
                 <h1 className="display-4 fw-normal">No game club yet 😱</h1>
                 <p className="fs-5 text-muted">
                     You are not part of a video game club yet? Look for the club that best identifies you,
