@@ -26,7 +26,6 @@ function NewClub() {
             alert(error.message)
         }
         if (data) {
-            // TODO: Create club-page
             await router.push('/')
         }
     }
@@ -35,22 +34,24 @@ function NewClub() {
         <h3>New Club</h3>
         <div>
             <div>
-                <label htmlFor="clubName">Club Name</label>
+                <label htmlFor="clubName" className="form-label">Club Name</label>
                 <input
+                    className="form-control"
                     type="text"
                     value={clubName || ''}
                     onChange={(e) => setClubName(e.target.value)}
                 />
             </div>
             <div>
-                <label htmlFor="description">Description</label>
+                <label htmlFor="description" className="form-label">Description</label>
                 <input
+                    className="form-control"
                     type="text"
                     value={description || ''}
                     onChange={(e) => setDescription(e.target.value)}
                 />
             </div>
-            <button onClick={createNewClub}>Create</button>
+            <button className="btn btn-primary mt-2" onClick={createNewClub}>Create</button>
         </div>
     </div>
 }
