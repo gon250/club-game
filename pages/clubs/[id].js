@@ -2,8 +2,9 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 import { supabase } from "../../utils/supabaseClient";
+import ClubTabs from "../../components/ClubTabs";
 
-function Clubs() {
+function Club() {
     const router = useRouter()
     const {id} = router.query
 
@@ -11,6 +12,7 @@ function Clubs() {
     const [message, setMessage] = useState('')
     const [loading, setLoading] = useState(true)
     const [subscribed, setSubscribed] = useState(false)
+    const [owner, setOwner] = useState(false)
 
     useEffect(() => {
         if (id) {
@@ -25,6 +27,7 @@ function Clubs() {
             .select(`
             name, 
             description,
+            profile_id,
             user_clubs(*),
             club_pages (
                 message,
@@ -34,11 +37,14 @@ function Clubs() {
             )
             `)
             .eq('id', id)
+            .eq('user_clubs.user_id', supabase.auth.user().id)
             .single()
         if (data) {
             setLoading(false)
             setClub(data);
+            console.log(data)
             setSubscribed(data.user_clubs.length > 0)
+            setOwner(data.profile_id === supabase.auth.user().id)
         }
 
         if (error) {
@@ -57,7 +63,7 @@ function Clubs() {
         fetchClub()
     }
 
-    const toogleSubscription = async () => {
+    const toggleSubscription = async () => {
         if (subscribed) {
             await supabase
                 .from('user_clubs')
@@ -76,20 +82,29 @@ function Clubs() {
         {
             (!loading && club)
                 ? <>
-                    <h1>
-                        {club.name}
-                        <small className="ml-2">
-                            <button className="btn btn-sm btn-outline-primary"
-                                    onClick={toogleSubscription}> {subscribed ? 'Unsubscribe' : 'Subscribe'}</button>
-                        </small>
-                    </h1>
-                    <p className="lead">{club.description}</p>
-                    <br/><br/>
-                    <h4>Club Messages</h4>
                     <div className="row">
-                        {club.club_pages && club.club_pages.map((item, id) => {
-                            return <div key={id} className="col-md-12 border border-primary m-2">{item.message} by {item.profiles.username}</div>
-                        })}
+                        <h1>
+                            {club.name}
+                            <small className="ml-2">
+                                <button className="btn btn-sm btn-outline-primary"
+                                        onClick={toggleSubscription}> {subscribed ? 'Unsubscribe' : 'Subscribe'}</button>
+                            </small>
+                        </h1>
+                        <p className="lead">{club.description}</p>
+                    </div>
+                    <hr/>
+                    <div className="row">
+                        <ClubTabs clubId={id} owner={owner} />
+                    </div>
+                    <hr/>
+                    <div className="row">
+                        <h4>Club Messages</h4>
+                        <div className="row">
+                            {club.club_pages && club.club_pages.map((item, id) => {
+                                return <div key={id}
+                                            className="col-md-12 border border-primary m-2">{item.message} by {item.profiles.username}</div>
+                            })}
+                        </div>
                     </div>
                     <hr/>
                     <div>
@@ -106,4 +121,4 @@ function Clubs() {
     </div>
 }
 
-export default Clubs
+export default Club
