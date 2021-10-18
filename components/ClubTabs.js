@@ -1,7 +1,7 @@
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import { useEffect, useState } from "react";
 
-import { supabase } from "../utils/supabaseClient";
+import { supabase } from "../lib/supabaseClient";
 
 function ClubTabs({clubId, owner}) {
     const [events, setEvents] = useState(null)

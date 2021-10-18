@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { useEffect, useState } from "react";
-import { supabase } from "../utils/supabaseClient";
+import { supabase } from "../lib/supabaseClient";
 import ClubCard from "../components/ClubCard";
 
 export default function Home() {

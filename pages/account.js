@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { supabase } from '../utils/supabaseClient'
+import { supabase } from '../lib/supabaseClient'
 import Avatar from "../components/Avatar";
 
 export default function Account() {

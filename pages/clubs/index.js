@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { supabase } from "../../utils/supabaseClient";
+import { supabase } from "../../lib/supabaseClient";
 import ClubCard from "../../components/ClubCard";
 import Link from "next/link";
 

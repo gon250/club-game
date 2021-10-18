@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useRouter } from 'next/router'
-import { supabase } from "../../utils/supabaseClient";
+import { supabase } from "../../lib/supabaseClient";
 
 function NewClub() {
     const router = useRouter()
