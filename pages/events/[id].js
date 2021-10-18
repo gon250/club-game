@@ -1,5 +1,5 @@
-import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
 import { supabase } from "../../lib/supabaseClient";
 
@@ -16,10 +16,14 @@ function Event() {
                 .select(`*`)
                 .eq('id', id)
                 .single()
-        }
 
-        if (data) {
-            setEvent(data)
+            if (data) {
+                setEvent(data)
+            }
+
+            if (error) {
+                alert('There was an error while getting the event.')
+            }
         }
 
         fetchEvent()

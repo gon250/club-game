@@ -2,7 +2,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Description 
 Hacktoberfest 2021 supabase.
-Website that still in WIP where the idea is to have a Game Club (kind of Book club but for video-games)
+Website implemented by the Supabase's Hacktoberfest where the idea is to have a Game Club (kind of Book club but for video-games)
+
+The main idea of this is play with supabase and participate in the event.
 
 ## Made with supabase
 * Demo: [https://club-game.vercel.app/](https://club-game.vercel.app/)

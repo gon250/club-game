@@ -1,22 +1,31 @@
 import { useEffect, useState } from "react";
+import Link from "next/link";
+
 import { supabase } from "../../lib/supabaseClient";
 import ClubCard from "../../components/ClubCard";
-import Link from "next/link";
 
 function Clubs() {
     const [clubs, setClubs] = useState(null)
+    const [clubsError, setClubsError] = useState(null)
 
     useEffect(() => {
         async function fetchClubs() {
             let {data: clubs, error} =
-                await supabase.from('clubs')
-                    .select('*')
+                await supabase.from('clubs').select('*')
             if (clubs) {
-                setClubs(clubs);
+                setClubs(clubs)
+            }
+            if (error) {
+                setClubsError(error)
             }
         }
+
         fetchClubs()
     }, [])
+
+    if (clubsError) {
+        return <div>There was an error while requesting the list of clubs, please try again.</div>
+    }
 
     return <>
         <div className="row">
@@ -29,7 +38,9 @@ function Clubs() {
         </div>
         <div className="row">
             <Link href="./clubs/new" passHref>
-                <button type="button" className="btn btn-outline-primary m-2">{`Can't find a club? create your own`}</button>
+                <button type="button" className="btn btn-outline-primary m-2">
+                    {`Can't find a club? create your own`}
+                </button>
             </Link>
         </div>
     </>

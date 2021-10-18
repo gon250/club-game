@@ -25,16 +25,16 @@ function Club() {
         const {data, error} = await supabase
             .from('clubs')
             .select(`
-            name, 
-            description,
-            profile_id,
-            user_clubs(*),
-            club_pages (
-                message,
-                profiles (
-                    username
+                name, 
+                description,
+                profile_id,
+                user_clubs(*),
+                club_pages (
+                    message,
+                    profiles (
+                        username
+                    )
                 )
-            )
             `)
             .eq('id', id)
             .eq('user_clubs.user_id', supabase.auth.user().id)
@@ -47,7 +47,6 @@ function Club() {
         }
 
         if (error) {
-            console.log(error)
             alert('There was an error while getting the game club info.')
         }
     };
@@ -58,7 +57,10 @@ function Club() {
             .insert([
                 {id_club: id, id_user: supabase.auth.user().id, message},
             ])
-        setMessage('')
+        if (error) {
+            alert('There was an error while sending your message, pls try again later.')
+        }
+        setMessage((data) ? '' : message)
         fetchClub()
     }
 
@@ -93,7 +95,7 @@ function Club() {
                     </div>
                     <hr/>
                     <div className="row">
-                        <ClubTabs clubId={id} owner={owner} />
+                        <ClubTabs clubId={id} owner={owner}/>
                     </div>
                     <hr/>
                     <div className="row">
@@ -115,7 +117,7 @@ function Club() {
                         <button onClick={createMessage} className="btn btn-sm btn-primary mt-2">add</button>
                     </div>
                 </>
-                : <div>loading</div>
+                : <div>loading...</div>
         }
     </div>
 }

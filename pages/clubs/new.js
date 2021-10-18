@@ -1,16 +1,15 @@
 import { useState } from "react";
 import { useRouter } from 'next/router'
+
 import { supabase } from "../../lib/supabaseClient";
 
 function NewClub() {
     const router = useRouter()
 
-    const [loading, setLoading] = useState(false)
     const [clubName, setClubName] = useState(null)
     const [description, setDescription] = useState(null)
 
     async function createNewClub() {
-        setLoading(true)
         const {data, error} = await supabase
             .from('clubs')
             .insert([
@@ -22,7 +21,6 @@ function NewClub() {
                 }
             ])
         if (error) {
-            setLoading(true)
             alert(error.message)
         }
         if (data) {
